@@ -4,6 +4,10 @@ from ansible.compat.tests import unittest
 import mock
 import gitupdater
 
+from gitup import config as gitup_config
+
+default_config_path = gitup_config.get_default_config_path()
+
 class TestFunction(unittest.TestCase):
 
     @mock.patch("gitupdater.AnsibleModule")
@@ -23,3 +27,5 @@ class TestFunction(unittest.TestCase):
 
         assert(mock.call(argument_spec=expected,
                supports_check_mode=True) == AnsibleModule.call_args)
+
+        self.assertTrue('/tmp' in open(default_config_path).read())
