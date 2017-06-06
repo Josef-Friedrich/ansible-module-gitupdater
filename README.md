@@ -3,18 +3,22 @@
 ```
 > GITUPDATER    (gitupdater.py)
 
-  gitup https://github.com/earwig/git-repo-updater is a console script that allows you to easily update multiple git repositories at once.
+  gitup https://github.com/earwig/git-repo-updater is a console script that allows you to easily update multiple git
+  repositories at once.
 
 Options (= is mandatory):
 
-= path
+- cleanup
+        Clean up the repositories that have been deleted.
+        [Default: False]
+- path
         Full path to the git repository.
-        (Choices: )[Default: []]
-        version_added: 1.0
+        [Default: False]
 - state
         State of the gitup configuration for this repository. The git repository itself is not affected.
         (Choices: present, absent)[Default: present]
-        version_added: 1.0
+
+Requirements:  git-repo-updater
 
 EXAMPLES:
 
@@ -32,6 +36,25 @@ EXAMPLES:
 - gitupdater:
     path: /var/repos/project
     state: absent
+
+# Delete non-existent repositories
+- gitupdater:
+    cleanup: yes
+
+RETURN VALUES:
+
+
+path:
+    description: Full path to the git repository
+    returned: always
+    type: string
+    sample: /path/to/repository
+state:
+    description: State of the gitup configuration for this repository
+    returned: always
+    type: string
+    sample: present
+
 
 
 MAINTAINERS: Josef Friedrich (@Josef-Friedrich)
@@ -52,7 +75,7 @@ METADATA:
 ## Test documentation
 
 ```
-source hacking/env-setup
+source /usr/local/src/ansible/hacking/env-setup
 /usr/local/src/ansible/test/sanity/validate-modules/validate-modules --arg-spec --warnings gitupdater.py
 ```
 

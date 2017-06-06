@@ -15,11 +15,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this software.  If not, see <http://www.gnu.org/licenses/>.
 
-from ansible.module_utils.basic import AnsibleModule
-from gitup import config as gitup_conf
-from cStringIO import StringIO
-import sys
-
 ANSIBLE_METADATA = {'metadata_version': '1.0',
                     'status': ['preview'],
                     'supported_by': 'community'}
@@ -36,15 +31,16 @@ description:
 version_added: "1.0"
 author: "Josef Friedrich (@Josef-Friedrich)"
 options:
+    cleanup:
+        description:
+            - Clean up the repositories that have been deleted.
+        required: false
+        default: false
     path:
         description:
             - Full path to the git repository.
-        required: true
-        default: []
-        choices: []
-        aliases:
-            - src
-        version_added: "1.0"
+        required: false
+        default: false
     state:
         description:
             - State of the gitup configuration for this repository. The
@@ -54,11 +50,8 @@ options:
         choices:
             - present
             - absent
-        aliases:
-          - src
-        version_added: "1.0"
-notes: []
-requirements: []
+requirements:
+    - git-repo-updater
 '''
 
 EXAMPLES = '''
@@ -75,7 +68,30 @@ EXAMPLES = '''
 - gitupdater:
     path: /var/repos/project
     state: absent
+
+# Delete non-existent repositories
+- gitupdater:
+    cleanup: yes
 '''
+
+RETURN = '''
+path:
+    description: Full path to the git repository
+    returned: always
+    type: string
+    sample: /path/to/repository
+state:
+    description: State of the gitup configuration for this repository
+    returned: always
+    type: string
+    sample: present
+
+'''
+
+from ansible.module_utils.basic import AnsibleModule
+from gitup import config as gitup_conf
+from cStringIO import StringIO
+import sys
 
 
 class Capturing(list):
@@ -93,7 +109,8 @@ class Capturing(list):
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            path=dict(required=True, aliases=['src']),
+            cleanup=dict(default=False, type='bool'),
+            path=dict(default=False),
             state=dict(default='present', choices=['present', 'absent']),
         ),
         supports_check_mode=True
@@ -101,21 +118,26 @@ def main():
 
     p = module.params
     changed = False
-    if p['state'] == 'present':
+    if p['cleanup']:
+        gitup_conf.clean_bookmarks()
+
+    if p['state'] == 'present' and p['path']:
         with Capturing() as output:
             gitup_conf.add_bookmarks([p['path']])
 
         if 'Added' in output[0]:
             changed = True
 
-    if p['state'] == 'absent':
+    if p['state'] == 'absent' and p['path']:
         with Capturing() as output:
             gitup_conf.delete_bookmarks([p['path']])
 
         if 'Deleted' in output[0]:
             changed = True
 
-    module.exit_json(changed=changed)
+    module.exit_json(changed=changed,
+                     path=str(p['path']),
+                     state=str(p['state']))
 
 
 if __name__ == '__main__':
