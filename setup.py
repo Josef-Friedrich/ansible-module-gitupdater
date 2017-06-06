@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='ansible-module-gitup',
+    name='ansible-module-gitupdater',
     version='1.0.0',
     author='Josef Friedrich',
     author_email='josef@friedrich.rocks',

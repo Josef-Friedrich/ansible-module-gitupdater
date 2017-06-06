@@ -26,7 +26,7 @@ ANSIBLE_METADATA = {'metadata_version': '1.0',
 
 DOCUMENTATION = '''
 ---
-module: gitup
+module: gitupdater
 short_description: Ansible module for the git-repo-updater (gitup)
 description:
     - gitup U(https://github.com/earwig/git-repo-updater) is a console
@@ -63,14 +63,16 @@ requirements: []
 
 EXAMPLES = '''
 # Bookmark a repository, state can be omitted
-- gitup:
+- gitupdater:
     path: /var/repos/project
+
 # Bookmark a repository
-- gitup:
+- gitupdater:
     path: /var/repos/project
     state: present
+
 # Delete bookmark
-- gitup:
+- gitupdater:
     path: /var/repos/project
     state: absent
 '''

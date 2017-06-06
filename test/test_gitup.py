@@ -2,11 +2,11 @@ from __future__ import (absolute_import, division)
 from ansible.compat.tests import unittest
 # import unittest
 import mock
-import git_repo_updater
+import gitupdater
 
 class TestFunction(unittest.TestCase):
 
-    @mock.patch("git_repo_updater.AnsibleModule")
+    @mock.patch("gitupdater.AnsibleModule")
     def test_mock(self, AnsibleModule):
         module = AnsibleModule.return_value
         module.params = {
@@ -14,7 +14,7 @@ class TestFunction(unittest.TestCase):
             'state': 'present',
         }
         module.check_mode = False
-        git_repo_updater.main()
+        gitupdater.main()
 
         expected = dict(
             path=dict(required=True, aliases=['src']),

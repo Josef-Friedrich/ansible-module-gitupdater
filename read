@@ -1,7 +1,4 @@
-# ansible-module-gitupdater
-
-```
-> GITUPDATER    (gitupdater.py)
+> GITUPDATER    (/home/jf/git-repositories/github/ansible-jf/ansible-module-gitup/gitupdater.py)
 
   gitup https://github.com/earwig/git-repo-updater is a console script that allows you to easily update multiple git repositories at once.
 
@@ -39,25 +36,3 @@ MAINTAINERS: Josef Friedrich (@Josef-Friedrich)
 METADATA:
 	Status: ['preview']
 	Supported_by: community
-```
-
-# Development
-
-## Test functionality
-
-```
-/usr/local/src/ansible/hacking/test-module -m gitupdater.py -a
-```
-
-## Test documentation
-
-```
-source hacking/env-setup
-/usr/local/src/ansible/test/sanity/validate-modules/validate-modules --arg-spec --warnings gitupdater.py
-```
-
-## Generate documentation
-
-```
-ansible-doc -M . gitupdater
-```
