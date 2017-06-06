@@ -1,0 +1,23 @@
+ansible
+git+http://github.com/earwig/git-repo-updater.git#egg=gitup
+
+
+# From: test/utils/tox/requirements.txt
+
+#
+# Test requirements
+#
+
+nose
+mock >= 1.0.1, < 1.1
+passlib
+coverage
+coveralls
+unittest2
+redis
+python-memcached
+python-systemd
+pycrypto
+botocore
+boto3
+pytest
