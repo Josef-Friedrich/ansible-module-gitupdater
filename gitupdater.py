@@ -90,8 +90,12 @@ state:
 
 from ansible.module_utils.basic import AnsibleModule
 from gitup import config as gitup_conf
-from cStringIO import StringIO
 import sys
+import six
+if six.PY2:
+    from cStringIO import StringIO
+elif six.PY3:
+    from io import StringIO
 
 
 class Capturing(list):
