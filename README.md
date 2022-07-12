@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/Josef-Friedrich/ansible-module-gitupdater.svg?branch=master)](https://travis-ci.org/Josef-Friedrich/ansible-module-gitupdater)
-
 # ansible-module-gitupdater
 
 Ansible module for the git-repo-updater (gitup).

@@ -1,7 +1,5 @@
-from __future__ import (absolute_import, division)
-from ansible.compat.tests import unittest
-# import unittest
-import mock
+from unittest import mock
+import unittest
 import gitupdater
 import tempfile
 import os

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ansible-module-gitupdater"
+name = "gitupdater"
 version = "1.0.0"
 description = "Ansible module for the git-repo-updater (gitup)."
 authors = ["Josef Friedrich <josef@friedrich.rocks>"]
@@ -9,6 +9,11 @@ repository = 'https://github.com/Josef-Friedrich/ansible-module-gitupdater'
 
 [tool.poetry.dependencies]
 python = "^3.8"
+gitup = "^0.5.1"
+
+[tool.poetry.group.dev.dependencies]
+ansible = "^6.0.0"
+pytest = "^7.1.2"
 
 [build-system]
 requires = ["poetry>=1.2.0b2"]
