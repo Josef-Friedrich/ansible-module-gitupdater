@@ -2,6 +2,8 @@
 
 # ansible-module-gitupdater
 
+Ansible module for the git-repo-updater (gitup).
+
 ```
 > GITUPDATER    (gitupdater.py)
 
