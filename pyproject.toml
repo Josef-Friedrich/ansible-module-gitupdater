@@ -5,9 +5,9 @@ description = "Ansible module for the git-repo-updater (gitup)."
 authors = ["Josef Friedrich <josef@friedrich.rocks>"]
 readme = "README.md"
 license = "GPL-3.0-only"
-repository = 'https://github.com/Josef-Friedrich/ansible-module-gitupdater'
+repository = "https://github.com/Josef-Friedrich/ansible-module-gitupdater"
 classifiers = [
-  'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
 
 [tool.poetry.dependencies]
