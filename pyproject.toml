@@ -7,7 +7,8 @@ readme = "README.md"
 license = "GPL-3.0-only"
 repository = "https://github.com/Josef-Friedrich/ansible-module-gitupdater"
 classifiers = [
-  "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Private :: Do not Upload",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
 
 [tool.poetry.dependencies]
