@@ -18,6 +18,7 @@ gitup = "^0.5.1"
 [tool.poetry.group.dev.dependencies]
 ansible = "^6.0.0"
 pytest = "^7.1.2"
+readme-patcher = "^0.5.0"
 
 [build-system]
 requires = ["poetry>=1.2.0b2"]
