@@ -1,7 +1,6 @@
 import os
 import tempfile
-import unittest
-from unittest import mock
+from unittest import TestCase, mock
 
 from gitup import config as gitup_config
 
@@ -12,8 +11,8 @@ tmp_dir = tempfile.mkdtemp()
 tmp_dir2 = tempfile.mkdtemp()
 
 
-class TestFunction(unittest.TestCase):
-    @mock.patch("gitupdater.AnsibleModule")
+class TestFunction(TestCase):
+    @mock.patch("ansible.AnsibleModule")
     def test_mock(self, AnsibleModule):
         module = AnsibleModule.return_value
         module.params = {
