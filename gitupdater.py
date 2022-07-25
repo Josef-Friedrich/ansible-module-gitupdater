@@ -15,11 +15,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this software.  If not, see <http://www.gnu.org/licenses/>.
 
-ANSIBLE_METADATA = {'metadata_version': '1.0',
-                    'status': ['preview'],
-                    'supported_by': 'community'}
+ANSIBLE_METADATA = {
+    "metadata_version": "1.0",
+    "status": ["preview"],
+    "supported_by": "community",
+}
 
-DOCUMENTATION = '''
+DOCUMENTATION = """
 ---
 module: gitupdater
 short_description: Ansible module for the git-repo-updater (gitup)
@@ -52,9 +54,9 @@ options:
             - absent
 requirements:
     - git-repo-updater
-'''
+"""
 
-EXAMPLES = '''
+EXAMPLES = """
 # Bookmark a repository, state can be omitted
 - gitupdater:
     path: /var/repos/project
@@ -72,9 +74,9 @@ EXAMPLES = '''
 # Delete non-existent repositories
 - gitupdater:
     cleanup: yes
-'''
+"""
 
-RETURN = '''
+RETURN = """
 path:
     description: Full path to the git repository
     returned: always
@@ -86,12 +88,14 @@ state:
     type: string
     sample: present
 
-'''
+"""
 
+import sys
+
+import six
 from ansible.module_utils.basic import AnsibleModule
 from gitup import config as gitup_conf
-import sys
-import six
+
 if six.PY2:
     from cStringIO import StringIO
 elif six.PY3:
@@ -113,36 +117,34 @@ class Capturing(list):
 def main():
     module = AnsibleModule(
         argument_spec=dict(
-            cleanup=dict(default=False, type='bool'),
+            cleanup=dict(default=False, type="bool"),
             path=dict(default=False),
-            state=dict(default='present', choices=['present', 'absent']),
+            state=dict(default="present", choices=["present", "absent"]),
         ),
-        supports_check_mode=True
+        supports_check_mode=True,
     )
 
     p = module.params
     changed = False
-    if p['cleanup']:
+    if p["cleanup"]:
         gitup_conf.clean_bookmarks()
 
-    if p['state'] == 'present' and p['path']:
+    if p["state"] == "present" and p["path"]:
         with Capturing() as output:
-            gitup_conf.add_bookmarks([p['path']])
+            gitup_conf.add_bookmarks([p["path"]])
 
-        if 'Added' in output[0]:
+        if "Added" in output[0]:
             changed = True
 
-    if p['state'] == 'absent' and p['path']:
+    if p["state"] == "absent" and p["path"]:
         with Capturing() as output:
-            gitup_conf.delete_bookmarks([p['path']])
+            gitup_conf.delete_bookmarks([p["path"]])
 
-        if 'Deleted' in output[0]:
+        if "Deleted" in output[0]:
             changed = True
 
-    module.exit_json(changed=changed,
-                     path=str(p['path']),
-                     state=str(p['state']))
+    module.exit_json(changed=changed, path=str(p["path"]), state=str(p["state"]))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
