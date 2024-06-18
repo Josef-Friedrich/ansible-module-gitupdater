@@ -17,10 +17,10 @@ gitup = "^0.5.1"
 
 [tool.poetry.group.dev.dependencies]
 ansible = "^6.0.0"
-pytest = "^7.1.2"
-readme-patcher = "^0.6.0"
-tox = "^3.25.1"
+pytest = "^8"
+readme-patcher = "^0"
+tox = "^4"
 
 [build-system]
-requires = ["poetry>=1.2.0b2"]
-build-backend = "poetry.masonry.api"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
