@@ -32,7 +32,4 @@ docs:
 lint:
 	poetry run tox -e lint
 
-pin_docs_requirements:
-	pip-compile --output-file=docs/requirements.txt docs/requirements.in pyproject.toml
-
-.PHONY: test install install_editable update build publish format docs lint pin_docs_requirements
+.PHONY: test install install_editable update build publish format docs lint
