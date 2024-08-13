@@ -12,11 +12,11 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8"
-gitup = "^0.5.1"
+python = "^3.10"
+gitup = "^0"
 
 [tool.poetry.group.dev.dependencies]
-ansible = "^6.0.0"
+ansible = "^10"
 pytest = "^8"
 readme-patcher = "^0"
 tox = "^4"
