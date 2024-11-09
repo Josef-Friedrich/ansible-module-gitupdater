@@ -11,7 +11,7 @@ tmp_dir = tempfile.mkdtemp()
 tmp_dir2 = tempfile.mkdtemp()
 
 
-class TestFunction(TestCase):
+class TestFunction:
     @mock.patch("ansible.AnsibleModule")
     def test_mock(self, AnsibleModule):
         module = AnsibleModule.return_value
@@ -34,22 +34,22 @@ class TestFunction(TestCase):
             == AnsibleModule.call_args
         )
 
-        self.assertTrue(tmp_dir in open(default_config_path).read())
+        assert tmp_dir in open(default_config_path).read()
 
         # Delete
         module.params["state"] = "absent"
         gitupdater.main()
-        self.assertFalse(tmp_dir in open(default_config_path).read())
+        assert not tmp_dir in open(default_config_path).read()
 
         # Add
         module.params["state"] = "present"
         module.params["path"] = tmp_dir2
         gitupdater.main()
-        self.assertTrue(tmp_dir2 in open(default_config_path).read())
+        assert tmp_dir2 in open(default_config_path).read()
 
         # cleanup
         os.rmdir(tmp_dir2)
         module.params["path"] = False
         module.params["cleanup"] = True
         gitupdater.main()
-        self.assertFalse(tmp_dir2 in open(default_config_path).read())
+        assert not tmp_dir2 in open(default_config_path).read()
