@@ -1,6 +1,6 @@
 import os
 import tempfile
-from unittest import TestCase, mock
+from unittest import mock
 
 from gitup import config as gitup_config
 
@@ -12,7 +12,7 @@ tmp_dir2 = tempfile.mkdtemp()
 
 
 class TestFunction:
-    @mock.patch("ansible.AnsibleModule")
+    @mock.patch("gitupdater.AnsibleModule")
     def test_mock(self, AnsibleModule):
         module = AnsibleModule.return_value
         module.params = {
@@ -39,7 +39,7 @@ class TestFunction:
         # Delete
         module.params["state"] = "absent"
         gitupdater.main()
-        assert not tmp_dir in open(default_config_path).read()
+        assert tmp_dir not in open(default_config_path).read()
 
         # Add
         module.params["state"] = "present"
@@ -52,4 +52,4 @@ class TestFunction:
         module.params["path"] = False
         module.params["cleanup"] = True
         gitupdater.main()
-        assert not tmp_dir2 in open(default_config_path).read()
+        assert tmp_dir2 not in open(default_config_path).read()

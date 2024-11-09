@@ -1,7 +1,7 @@
 ansible-module-gitupdater
 =========================
 
-Ansible module for the git-repo-updater (gitup).
+Ansible module for the `git-repo-updater <https://github.com/earwig/git-repo-updater>`__ (gitup).
 
 {{ cli('ansible-doc gitupdater') | literal }}
 

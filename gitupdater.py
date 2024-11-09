@@ -14,6 +14,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this software.  If not, see <http://www.gnu.org/licenses/>.
+from __future__ import annotations
+
+import sys
+from io import StringIO
+
+from ansible.module_utils.basic import AnsibleModule
+from gitup import config as gitup_conf
 
 ANSIBLE_METADATA = {
     "metadata_version": "1.0",
@@ -89,12 +96,6 @@ state:
     sample: present
 
 """
-
-import sys
-from io import StringIO
-
-from ansible.module_utils.basic import AnsibleModule
-from gitup import config as gitup_conf
 
 
 class Capturing(list):

@@ -20,6 +20,7 @@ ansible = "^10"
 pytest = "^8"
 readme-patcher = "^0"
 tox = "^4"
+mypy = "^1"
 
 [build-system]
 requires = ["poetry-core"]
