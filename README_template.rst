@@ -1,3 +1,5 @@
+{{ badge.github_workflow() }}
+
 ansible-module-gitupdater
 =========================
 

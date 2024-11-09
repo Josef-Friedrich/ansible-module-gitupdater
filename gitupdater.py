@@ -18,6 +18,7 @@ from __future__ import annotations
 
 import sys
 from io import StringIO
+from typing import Literal, TypedDict, Union
 
 from ansible.module_utils.basic import AnsibleModule
 from gitup import config as gitup_conf
@@ -96,6 +97,12 @@ state:
     sample: present
 
 """
+
+
+class ModuleParams(TypedDict, total=False):
+    path: Union[str, bool]
+    state: Literal["present", "absent"]
+    cleanup: bool
 
 
 class Capturing(list):

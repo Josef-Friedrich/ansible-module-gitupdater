@@ -1,10 +1,12 @@
 import os
 import tempfile
+from typing import cast
 from unittest import mock
 
 from gitup import config as gitup_config
 
 import gitupdater
+from gitupdater import ModuleParams
 
 default_config_path = gitup_config.get_default_config_path()
 tmp_dir = tempfile.mkdtemp()
@@ -13,13 +15,16 @@ tmp_dir2 = tempfile.mkdtemp()
 
 class TestFunction:
     @mock.patch("gitupdater.AnsibleModule")
-    def test_mock(self, AnsibleModule):
+    def test_mock(self, AnsibleModule: mock.MagicMock):
         module = AnsibleModule.return_value
-        module.params = {
-            "path": tmp_dir,
-            "state": "present",
-            "cleanup": False,
-        }
+        module.params = cast(
+            ModuleParams,
+            {
+                "path": tmp_dir,
+                "state": "present",
+                "cleanup": False,
+            },
+        )
         module.check_mode = False
         gitupdater.main()
 
