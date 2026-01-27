@@ -1,27 +1,44 @@
-[tool.poetry]
+[project]
 name = "gitupdater"
 version = "1.0.0"
 description = "Ansible module for the git-repo-updater (gitup)."
-authors = ["Josef Friedrich <josef@friedrich.rocks>"]
+authors = [{ name = "Josef Friedrich", email = "josef@friedrich.rocks" }]
+requires-python = ">=3.12,<4"
 readme = "README.rst"
 license = "GPL-3.0-only"
-repository = "https://github.com/Josef-Friedrich/ansible-module-gitupdater"
 classifiers = [
     "Private :: Do not Upload",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.10"
-gitup = { git = "https://github.com/earwig/git-repo-updater.git" }
-ansible = "^10"
+dependencies = [
+    "ansible>=13.2.0",
+    "gitup",
+]
 
-[tool.poetry.group.dev.dependencies]
-pytest = "^8"
-readme-patcher = "^0"
-tox = "^4"
-mypy = "^1"
+[project.urls]
+Repository = "https://github.com/Josef-Friedrich/ansible-module-gitupdater"
+
+[tool.uv.sources]
+gitup = { git = "https://github.com/earwig/git-repo-updater.git" }
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.8.10,<0.9.0"]
+build-backend = "uv_build"
+
+
+[tool.uv.build-backend]
+module-name = "gitupdater"
+module-root = ""
+namespace = true

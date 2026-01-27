@@ -22,8 +22,8 @@ Ansible module for the `git-repo-updater <https://github.com/earwig/git-repo-upd
        path    Full path to the git repository.
             default: false
 
-       state   State of the gitup configuration for this repository. The git
-               repository itself is not affected.
+       state   State of the gitup configuration for this repository. The
+               git repository itself is not affected.
             choices: [present, absent]
             default: present
 
