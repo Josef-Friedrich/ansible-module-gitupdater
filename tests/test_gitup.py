@@ -28,33 +28,37 @@ class TestFunction:
         module.check_mode = False
         gitupdater.main()
 
-        expected = dict(
-            path=dict(default=False),
-            state=dict(default="present", choices=["present", "absent"]),
-            cleanup=dict(default=False, type="bool"),
-        )
+        expected = {
+            "path": {"default": False},
+            "state": {"default": "present", "choices": ["present", "absent"]},
+            "cleanup": {"default": False, "type": "bool"},
+        }
 
         assert (
             mock.call(argument_spec=expected, supports_check_mode=True)
             == AnsibleModule.call_args
         )
 
-        assert tmp_dir in open(default_config_path).read()
+        with open(default_config_path) as config_file:
+            assert tmp_dir in config_file.read()
 
         # Delete
         module.params["state"] = "absent"
         gitupdater.main()
-        assert tmp_dir not in open(default_config_path).read()
+        with open(default_config_path) as config_file:
+            assert tmp_dir not in config_file.read()
 
         # Add
         module.params["state"] = "present"
         module.params["path"] = tmp_dir2
         gitupdater.main()
-        assert tmp_dir2 in open(default_config_path).read()
+        with open(default_config_path) as config_file:
+            assert tmp_dir2 in config_file.read()
 
         # cleanup
         os.rmdir(tmp_dir2)
         module.params["path"] = False
         module.params["cleanup"] = True
         gitupdater.main()
-        assert tmp_dir2 not in open(default_config_path).read()
+        with open(default_config_path) as config_file:
+            assert tmp_dir2 not in config_file.read()

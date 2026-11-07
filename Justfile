@@ -35,7 +35,7 @@ docs_readme_patcher:
 	uv tool run --isolated readme-patcher
 
 lint:
-	uv tool run ruff check
+	uv tool run ruff check --fix --unsafe-fixes
 
 type_check:
 	uv tool run mypy typings gitupdater.py tests

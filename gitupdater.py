@@ -18,7 +18,7 @@ from __future__ import annotations
 
 import sys
 from io import StringIO
-from typing import Literal, TypedDict, Union
+from typing import Literal, TypedDict
 
 from ansible.module_utils.basic import AnsibleModule
 from gitup import config as gitup_conf
@@ -100,7 +100,7 @@ state:
 
 
 class ModuleParams(TypedDict, total=False):
-    path: Union[str, bool]
+    path: str | bool
     state: Literal["present", "absent"]
     cleanup: bool
 
@@ -119,11 +119,11 @@ class Capturing(list):
 
 def main():
     module = AnsibleModule(
-        argument_spec=dict(
-            cleanup=dict(default=False, type="bool"),
-            path=dict(default=False),
-            state=dict(default="present", choices=["present", "absent"]),
-        ),
+        argument_spec={
+            "cleanup": {"default": False, "type": "bool"},
+            "path": {"default": False},
+            "state": {"default": "present", "choices": ["present", "absent"]},
+        },
         supports_check_mode=True,
     )
 
